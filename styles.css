@@ -2,10 +2,32 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 20px;
+    background-color: white;
+    color: black;
+    transition: background 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: white;
 }
 
 h1 {
-    color: #333;
+    color: inherit;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 input {
@@ -28,8 +50,22 @@ th, td {
 th {
     background-color: #f4f4f4;
     cursor: pointer;
+    position: relative;
 }
 
 th:hover {
     background-color: #ddd;
+}
+
+th span {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.dark-mode th {
+    background-color: #333;
+}
+
+.dark-mode th:hover {
+    background-color: #444;
 }

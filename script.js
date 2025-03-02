@@ -9,9 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("search").addEventListener("input", function () {
         let query = this.value.toLowerCase();
         let filteredFilms = window.filmsData.filter(film =>
-            film.title.toLowerCase().includes(query)
+            film.title.toLowerCase().includes(query) ||
+            film.directors.toLowerCase().includes(query)
         );
         displayFilms(filteredFilms);
+    });
+
+    document.getElementById("toggle-theme").addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+        this.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
 });
 
@@ -33,8 +39,9 @@ function displayFilms(films) {
 function sortTable(columnIndex) {
     let table = document.querySelector("table tbody");
     let rows = Array.from(table.rows);
-    let ascending = table.dataset.order !== "asc";
+    let header = document.querySelectorAll("th span")[columnIndex];
 
+    let ascending = !header.dataset.order || header.dataset.order === "desc";
     rows.sort((rowA, rowB) => {
         let cellA = rowA.cells[columnIndex].innerText;
         let cellB = rowB.cells[columnIndex].innerText;
@@ -42,6 +49,16 @@ function sortTable(columnIndex) {
         return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
     });
 
-    table.dataset.order = ascending ? "asc" : "desc";
+    header.dataset.order = ascending ? "asc" : "desc";
+    header.innerHTML = ascending ? "▲" : "▼";
+
+    // drop arrows for other columns
+    document.querySelectorAll("th span").forEach((span, index) => {
+        if (index !== columnIndex) {
+            span.innerHTML = "";
+            span.dataset.order = "";
+        }
+    });
+
     rows.forEach(row => table.appendChild(row));
 }
