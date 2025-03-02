@@ -4,12 +4,12 @@
         "release_year": 2009,
         "directors": "James Cameron",
         "box_office": 2923706026.0,
-        "country": "Unknown"
+        "country": "United Kingdom, United States"
     },
     {
         "title": "Avengers: Endgame",
         "release_year": 2019,
-        "directors": "Anthony RussoJoe Russo",
+        "directors": "Anthony Russo, Joe Russo",
         "box_office": 2797501328.0,
         "country": "United States"
     },
@@ -37,7 +37,7 @@
     {
         "title": "Avengers: Infinity War",
         "release_year": 2018,
-        "directors": "Anthony RussoJoe Russo",
+        "directors": "Anthony Russo, Joe Russo",
         "box_office": 2048359754.0,
         "country": "United States"
     },
@@ -45,7 +45,7 @@
         "title": "Ne Zha 2",
         "release_year": 2025,
         "directors": "Jiaozi",
-        "box_office": 1983302560.0,
+        "box_office": 1985082560.0,
         "country": "China"
     },
     {
@@ -88,7 +88,7 @@
         "release_year": 2015,
         "directors": "James Wan",
         "box_office": 1515341399.0,
-        "country": "Unknown"
+        "country": "United States, China"
     },
     {
         "title": "Top Gun: Maverick",
@@ -109,7 +109,7 @@
         "release_year": 2023,
         "directors": "Greta Gerwig",
         "box_office": 1447038421.0,
-        "country": "Unknown"
+        "country": "United States, United Kingdom"
     },
     {
         "title": "Avengers: Age of Ultron",
@@ -137,7 +137,7 @@
         "release_year": 2011,
         "directors": "David Yates",
         "box_office": 1342139727.0,
-        "country": "Unknown"
+        "country": "United Kingdom, United States"
     },
     {
         "title": "Deadpool & Wolverine",
@@ -158,7 +158,7 @@
         "release_year": 2018,
         "directors": "J. A. Bayona",
         "box_office": 1308473425.0,
-        "country": "Unknown"
+        "country": "China, United States"
     },
     {
         "title": "Frozen",
@@ -186,7 +186,7 @@
         "release_year": 2017,
         "directors": "F. Gary Gray",
         "box_office": 81238764765.0,
-        "country": "Unknown"
+        "country": "United States, China"
     },
     {
         "title": "Iron Man 3",
@@ -205,7 +205,7 @@
     {
         "title": "Captain America: Civil War",
         "release_year": 2016,
-        "directors": "Anthony RussoJoe Russo",
+        "directors": "Anthony Russo Joe Russo, Anthony Russo, Joe Russo",
         "box_office": 1153337496.0,
         "country": "United States"
     },
@@ -221,7 +221,7 @@
         "release_year": 2003,
         "directors": "Peter Jackson",
         "box_office": 1147997407.0,
-        "country": "Unknown"
+        "country": "New Zealand, Germany, United States"
     },
     {
         "title": "Spider-Man: Far From Home",
@@ -233,7 +233,7 @@
     {
         "title": "Captain Marvel",
         "release_year": 2019,
-        "directors": "Anna BodenRyan Fleck",
+        "directors": "Anna Boden, Ryan Fleck",
         "box_office": 1128274794.0,
         "country": "United States"
     },
@@ -249,7 +249,7 @@
         "release_year": 2012,
         "directors": "Sam Mendes",
         "box_office": 1108594137.0,
-        "country": "Unknown"
+        "country": "United Kingdom, United States"
     },
     {
         "title": "Transformers: Age of Extinction",
@@ -263,7 +263,7 @@
         "release_year": 2012,
         "directors": "Christopher Nolan",
         "box_office": 1081169825.0,
-        "country": "Unknown"
+        "country": "United States, United Kingdom"
     },
     {
         "title": "Joker",
@@ -310,8 +310,8 @@
     {
         "title": "Moana 2",
         "release_year": 2024,
-        "directors": "David Derrick Jr., [1], [1], [1]",
-        "box_office": 1053578188.0,
+        "directors": "David Derrick Jr., Jason Hand, Dana Ledoux Miller",
+        "box_office": 1053978188.0,
         "country": "United States"
     },
     {
