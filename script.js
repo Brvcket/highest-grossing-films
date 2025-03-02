@@ -3,21 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             window.filmsData = data;
+            window.currentSort = {column: 3, ascending: false}; 
             displayFilms(data);
+            updateSortIndicator();
+            sortTable(3, false); 
         });
 
     document.getElementById("search").addEventListener("input", function () {
         let query = this.value.toLowerCase();
         let filteredFilms = window.filmsData.filter(film =>
-            film.title.toLowerCase().includes(query) ||
+            film.title.toLowerCase().includes(query) || 
             film.directors.toLowerCase().includes(query)
         );
         displayFilms(filteredFilms);
+        updateSortIndicator();
     });
 
     document.getElementById("toggle-theme").addEventListener("click", function () {
         document.body.classList.toggle("dark-mode");
-        this.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
 });
 
@@ -36,29 +39,39 @@ function displayFilms(films) {
     });
 }
 
-function sortTable(columnIndex) {
+function sortTable(columnIndex, toggle = true) {
     let table = document.querySelector("table tbody");
     let rows = Array.from(table.rows);
-    let header = document.querySelectorAll("th span")[columnIndex];
+    
+    if (toggle) {
+        window.currentSort.ascending = window.currentSort.column === columnIndex ? !window.currentSort.ascending : true;
+    } else {
+        window.currentSort.ascending = false; // Default: Box Office Descending
+    }
+    window.currentSort.column = columnIndex;
 
-    let ascending = !header.dataset.order || header.dataset.order === "desc";
     rows.sort((rowA, rowB) => {
         let cellA = rowA.cells[columnIndex].innerText;
         let cellB = rowB.cells[columnIndex].innerText;
 
-        return ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
-    });
-
-    header.dataset.order = ascending ? "asc" : "desc";
-    header.innerHTML = ascending ? "▲" : "▼";
-
-    // drop arrows for other columns
-    document.querySelectorAll("th span").forEach((span, index) => {
-        if (index !== columnIndex) {
-            span.innerHTML = "";
-            span.dataset.order = "";
+        if (columnIndex === 3) {
+            cellA = parseFloat(cellA.replace(/[^0-9.]/g, "")) || 0;
+            cellB = parseFloat(cellB.replace(/[^0-9.]/g, "")) || 0;
         }
+
+        return window.currentSort.ascending ? cellA - cellB : cellB - cellA;
     });
 
     rows.forEach(row => table.appendChild(row));
+    updateSortIndicator();
+}
+
+function updateSortIndicator() {
+    document.querySelectorAll("th").forEach((th, index) => {
+        if (index === window.currentSort.column) {
+            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "") + (window.currentSort.ascending ? " ▲" : " ▼");
+        } else {
+            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "");
+        }
+    });
 }
