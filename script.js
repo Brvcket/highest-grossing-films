@@ -21,8 +21,8 @@ function displayFilms(films) {
     films.forEach(film => {
         let row = `<tr>
             <td>${film.title}</td>
-            <td>${film.year}</td>
-            <td>${film.director}</td>
+            <td>${film.release_year}</td>
+            <td>${film.directors}</td>
             <td>$${film.box_office.toLocaleString()}</td>
             <td>${film.country}</td>
         </tr>`;
