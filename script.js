@@ -72,3 +72,12 @@ function sortTable(columnIndex, toggle = true) {
     updateSortIndicator();
 }
 
+function updateSortIndicator() {
+    document.querySelectorAll("th").forEach((th, index) => {
+        if (index === window.currentSort.column) {
+            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "") + (window.currentSort.ascending ? " ▲" : " ▼");
+        } else {
+            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "");
+        }
+    });
+}
