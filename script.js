@@ -51,27 +51,24 @@ function sortTable(columnIndex, toggle = true) {
     window.currentSort.column = columnIndex;
 
     rows.sort((rowA, rowB) => {
-        let cellA = rowA.cells[columnIndex].innerText;
-        let cellB = rowB.cells[columnIndex].innerText;
+        let cellA = rowA.cells[columnIndex].innerText.trim();
+        let cellB = rowB.cells[columnIndex].innerText.trim();
 
         if (columnIndex === 3) {
             cellA = parseFloat(cellA.replace(/[^0-9.]/g, "")) || 0;
             cellB = parseFloat(cellB.replace(/[^0-9.]/g, "")) || 0;
+            return window.currentSort.ascending ? cellA - cellB : cellB - cellA;
         }
 
-        return window.currentSort.ascending ? cellA - cellB : cellB - cellA;
+        if (columnIndex === 1) {
+            cellA = parseInt(cellA, 10) || 0;
+            cellB = parseInt(cellB, 10) || 0;
+            return window.currentSort.ascending ? cellA - cellB : cellB - cellA;
+        }
+        return window.currentSort.ascending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
     });
 
     rows.forEach(row => table.appendChild(row));
     updateSortIndicator();
 }
 
-function updateSortIndicator() {
-    document.querySelectorAll("th").forEach((th, index) => {
-        if (index === window.currentSort.column) {
-            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "") + (window.currentSort.ascending ? " ▲" : " ▼");
-        } else {
-            th.innerHTML = th.innerText.replace(/ ▲| ▼/g, "");
-        }
-    });
-}
