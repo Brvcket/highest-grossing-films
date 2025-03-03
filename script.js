@@ -3,24 +3,34 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             window.filmsData = data;
-            window.currentSort = {column: 3, ascending: false}; 
             displayFilms(data);
-            updateSortIndicator();
-            sortTable(3, false); 
+            sortTable(3, false); // Default sorting by Box Office (descending)
         });
 
     document.getElementById("search").addEventListener("input", function () {
         let query = this.value.toLowerCase();
         let filteredFilms = window.filmsData.filter(film =>
-            film.title.toLowerCase().includes(query) || 
-            film.directors.toLowerCase().includes(query)
+            film.title.toLowerCase().includes(query) || film.directors.toLowerCase().includes(query)
         );
         displayFilms(filteredFilms);
-        updateSortIndicator();
     });
 
-    document.getElementById("toggle-theme").addEventListener("click", function () {
+    const darkModeToggle = document.createElement("button");
+    darkModeToggle.innerText = "Toggle Dark Mode";
+    darkModeToggle.id = "dark-mode-toggle";
+    document.body.insertBefore(darkModeToggle, document.body.firstChild);
+
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+    }
+
+    darkModeToggle.addEventListener("click", function () {
         document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
     });
 });
 
@@ -28,16 +38,19 @@ function displayFilms(films) {
     let tableBody = document.getElementById("films-table");
     tableBody.innerHTML = "";
     films.forEach(film => {
+        let firstDirector = film.directors.split(",")[0].trim(); // Only first director (requirement)
+        let firstCountry = film.country.split(",")[0].trim();   // Only first country (requirement)
         let row = `<tr>
             <td>${film.title}</td>
             <td>${film.release_year}</td>
-            <td>${film.directors}</td>
+            <td>${firstDirector}</td>
             <td>$${film.box_office.toLocaleString()}</td>
-            <td>${film.country}</td>
+            <td>${firstCountry}</td>
         </tr>`;
         tableBody.innerHTML += row;
     });
 }
+
 
 function sortTable(columnIndex, toggle = true) {
     let table = document.querySelector("table tbody");
