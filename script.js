@@ -3,34 +3,25 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             window.filmsData = data;
+            window.currentSort = { column: 3, ascending: false }; // Default: Box Office, Descending
             displayFilms(data);
-            sortTable(3, false); // Default sorting by Box Office (descending)
+            updateSortIndicator();
+            sortTable(3, false); // Initial sorting by Box Office (Descending)
         });
 
     document.getElementById("search").addEventListener("input", function () {
         let query = this.value.toLowerCase();
         let filteredFilms = window.filmsData.filter(film =>
-            film.title.toLowerCase().includes(query) || film.directors.toLowerCase().includes(query)
+            film.title.toLowerCase().includes(query) || 
+            film.directors.toLowerCase().includes(query)
         );
         displayFilms(filteredFilms);
+        updateSortIndicator();
     });
 
-    const darkModeToggle = document.createElement("button");
-    darkModeToggle.innerText = "Toggle Dark Mode";
-    darkModeToggle.id = "dark-mode-toggle";
-    document.body.insertBefore(darkModeToggle, document.body.firstChild);
-
-    if (localStorage.getItem("darkMode") === "enabled") {
-        document.body.classList.add("dark-mode");
-    }
-
-    darkModeToggle.addEventListener("click", function () {
+    document.getElementById("toggle-theme").addEventListener("click", function () {
         document.body.classList.toggle("dark-mode");
-        if (document.body.classList.contains("dark-mode")) {
-            localStorage.setItem("darkMode", "enabled");
-        } else {
-            localStorage.setItem("darkMode", "disabled");
-        }
+        this.textContent = document.body.classList.contains("dark-mode") ? "☀️ Light Mode" : "🌙 Dark Mode";
     });
 });
 
